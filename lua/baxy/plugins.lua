@@ -152,7 +152,6 @@ lazy.setup({
     {
         "mfussenegger/nvim-dap",
         dependencies = {
-            "nvim-telescope/telescope-dap.nvim",
             "leoluz/nvim-dap-go",
             "rcarriga/nvim-dap-ui",
             "theHamsta/nvim-dap-virtual-text",
