@@ -1,5 +1,6 @@
 local M = {}
 
+---@diagnostic disable-next-line: different-requires
 local whichkey = require "which-key"
 
 -- local function keymap(lhs, rhs, desc)
