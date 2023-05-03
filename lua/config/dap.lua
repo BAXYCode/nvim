@@ -51,17 +51,17 @@ local function configure_exts()
 end
 
 local function configure_debuggers()
-  require("config.dap.lua").setup()
-  require("config.dap.python").setup()
-  require("config.dap.rust").setup()
-  require("config.dap.go").setup()
+  require("config.lsp-dap.lua").setup()
+  require("config.lsp-dap.python").setup()
+  require("config.lsp-dap.rust").setup()
+  require("config.lsp-dap.go").setup()
 end
 
 function M.setup()
   configure() -- Configuration
   configure_exts() -- Extensions
   configure_debuggers() -- Debugger
-  require("config.dap.keymaps").setup() -- Keymaps
+  require("config.lsp-dap.keymaps").setup() -- Keymaps
 end
 
 configure_debuggers()

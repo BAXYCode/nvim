@@ -37,9 +37,7 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
 cmp_mappings['<Tab>'] = nil
 cmp_mappings['<S-Tab>'] = nil
 
-lsp.setup_nvim_cmp({
-    mapping = cmp_mappings
-})
+
 
 local lspkind = require('lspkind')
 local ELLIPSIS_CHAR = "..."
@@ -114,22 +112,12 @@ lsp.setup_nvim_cmp({
 
 lsp.set_preferences {
     sign_icons = {
-        error = 'E',
-        warn = 'W',
-        hint = 'H',
-        info = 'I'
-    }
+        error =" ",
+        warn = " ",
+        hint = " ",
+        info = " "    }
 }
 
 lsp.setup()
-local rust_lsp = lsp.build_options('rust_analyzer', {
-    single_file_support = false,
-    on_attach = function(client, bufnr)
-    end
-})
+require "config.lsp-dap"
 
-require('rust-tools').setup({ server = rust_lsp })
-vim.diagnostic.config({
-    virtual_text = false,
-    signs = true
-})
