@@ -27,8 +27,11 @@ lazy.setup({
             require("config.which-key")
         end
     },
+    "b0o/SchemaStore.nvim",
     { "folke/neoconf.nvim",      cmd = "Neoconf" },
     "folke/neodev.nvim",
+    "stevearc/aerial.nvim",
+    "mfussenegger/nvim-jdtls",
     {
         'nvim-treesitter/nvim-treesitter',
         event = "BufEnter",

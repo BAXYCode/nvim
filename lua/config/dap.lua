@@ -7,7 +7,7 @@ local function configure()
   }
 
   local dap_breakpoint = {
-    error = {
+   error = {
       text = "🟥",
       texthl = "LspDiagnosticsSignError",
       linehl = "",
@@ -50,20 +50,11 @@ local function configure_exts()
   end
 end
 
-local function configure_debuggers()
-  require("config.lsp-dap.lua").setup()
-  require("config.lsp-dap.python").setup()
-  require("config.lsp-dap.rust").setup()
-  require("config.lsp-dap.go").setup()
-end
-
 function M.setup()
   configure() -- Configuration
   configure_exts() -- Extensions
-  configure_debuggers() -- Debugger
   require("config.lsp-dap.keymaps").setup() -- Keymaps
 end
 
-configure_debuggers()
 
 return M
