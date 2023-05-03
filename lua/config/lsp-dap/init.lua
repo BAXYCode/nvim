@@ -1,4 +1,3 @@
-require("lsp-dap.keymaps").setup()
-require("lsp-dap.go").setup()
-require("lsp-dap.python").setup()
-require("lsp-dap.rust").setup()
+require("config.lsp-dap.go").setup()
+require("config.lsp-dap.python").setup()
+require("config.lsp-dap.rust").setup()
