@@ -1,9 +1,7 @@
 local M = {}
 
 -- local util = require "lspconfig.util"
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local servers = {
-    gopls = {},
     html = {},
     jsonls = {
         settings = {
@@ -14,7 +12,7 @@ local servers = {
     },
     pyright = {
         analysis = {
-            typeCheckingMode = "off",
+            typeCheckingMode = "on",
         },
     },
     -- pylsp = {}, -- Integration with rope for refactoring - https://github.com/python-rope/pylsp-rope
@@ -29,7 +27,7 @@ local servers = {
             },
         },
     },
-    sumneko_lua = {
+    lua_ls = {
         settings = {
             Lua = {
                 runtime = {
@@ -59,7 +57,6 @@ local servers = {
         },
     },
     tsserver = { disable_formatting = true },
-    vimls = {},
     tailwindcss = {},
     yamlls = {
         schemastore = {
@@ -74,15 +71,8 @@ local servers = {
             },
         },
     },
-    jdtls = {},
     dockerls = {},
-    graphql = {},
-    bashls = {},
-    omnisharp = {},
     kotlin_language_server = {},
-    emmet_ls = {},
-    marksman = {},
-    angularls = {},
 }
 
 function M.on_attach(client, bufnr)
@@ -97,24 +87,14 @@ function M.on_attach(client, bufnr)
     -- Configure key mappings
     require("config.lsp-dap.keymaps").setup(client, bufnr)
 
+    print(require('cmp').visible())
 
-    -- Configure formatting
-    require("config.lsp-dap.null-ls.formatters").setup(client, bufnr)
 
     -- tagfunc
     if client.server_capabilities.definitionProvider then
         vim.api.nvim_buf_set_option(bufnr, "tagfunc", "v:lua.vim.lsp.tagfunc")
     end
 
-    -- Configure for jdtls
-    if client.name == "jdt.ls" then
-        require("jdtls").setup_dap { hotcodereplace = "auto" }
-        require("jdtls.dap").setup_dap_main_class_configs()
-        vim.lsp.codelens.refresh()
-    end
-
-    -- aerial.nvim
-    require("aerial").on_attach(client, bufnr)
 
     -- nvim-navic
     if client.server_capabilities.documentSymbolProvider then
@@ -123,6 +103,7 @@ function M.on_attach(client, bufnr)
     end
 end
 
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.textDocument.foldingRange = {
     dynamicRegistration = false,
@@ -135,7 +116,10 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
         "additionalTextEdits",
     },
 }
+local inspect = require 'config.lsp-dap.inspect'
 M.capabilities = capabilities
+--local inspect = require 'inspect'
+--print(inspect(M.capabilities))
 local opts = {
     on_attach = M.on_attach,
     capabilities = M.capabilities,
@@ -149,6 +133,7 @@ require("config.lsp-dap.options").setup()
 
 function M.setup()
     -- null-ls
+
     require("config.lsp-dap.null-ls").setup(opts)
 
     -- Installer
@@ -179,4 +164,4 @@ function M.remove_unused_imports()
     vim.cmd "wa"
 end
 
-return M
+return M.setup()

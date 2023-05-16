@@ -45,7 +45,7 @@ lazy.setup({
     'tpope/vim-fugitive',
     {
         'VonHeikemen/lsp-zero.nvim',
-        dependencies = {
+        dependencies = { 
             -- LSP Support
             'neovim/nvim-lspconfig',             -- Required
             'williamboman/mason.nvim',           -- Optional
@@ -59,6 +59,7 @@ lazy.setup({
             'hrsh7th/cmp-path',         -- Optional
             'saadparwaiz1/cmp_luasnip', -- Optional
             'hrsh7th/cmp-nvim-lua',     -- Optional
+            'jose-elias-alvarez/null-ls.nvim',
 
 
             -- Snippets
@@ -87,7 +88,7 @@ lazy.setup({
             "MunifTanjim/nui.nvim" },
         lazy = true
     },
-
+    'stevearc/aerial.nvim',
     { 'akinsho/bufferline.nvim', version = "*" },
     { 'akinsho/toggleterm.nvim', version = '*',  config = true },
 
@@ -176,9 +177,6 @@ lazy.setup({
     'kdheepak/lazygit.nvim',
     {
         'simrat39/rust-tools.nvim',
-        config = function()
-            require("config.rust-tools")
-        end
     },
     {
         "simrat39/inlay-hints.nvim",

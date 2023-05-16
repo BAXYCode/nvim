@@ -21,9 +21,9 @@ lsp.configure('lua-language-server', {
 })
 
 lsp.set_server_config({
-  on_init = function(client)
-    client.server_capabilities.semanticTokensProvider = nil
-  end,
+    on_init = function(client)
+        client.server_capabilities.semanticTokensProvider = nil
+    end,
 })
 local cmp = require('cmp')
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
@@ -41,20 +41,7 @@ cmp_mappings['<S-Tab>'] = nil
 
 local lspkind = require('lspkind')
 local ELLIPSIS_CHAR = "..."
-cmp.setup {
-    formatting = {
-        format = lspkind.cmp_format({
-            mode = 'symbol',         -- show only symbol annotations
-            maxwidth = 30,           -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
-            ellipsis_char = ELLIPSIS_CHAR, -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
-            -- The function below will be called before any actual modifications from lspkind
-            -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
-            before = function(entry, vim_item)
-                return vim_item
-            end
-        })
-    }
-}
+
 
 
 lsp.on_attach(function(client, bufnr)
@@ -89,6 +76,7 @@ local luasnip = require("luasnip")
 
 
 lsp.setup_nvim_cmp({
+
     sources = {
         { name = 'path' },
         { name = 'nvim_lsp' },
@@ -99,9 +87,13 @@ lsp.setup_nvim_cmp({
     mapping = cmp_mappings,
     formatting = {
         format = require("lspkind").cmp_format({
-            mode = "symbol_text",
-            maxwidth = 50,
-            ellipsis_char = "..."
+            mode = "symbol",
+            maxwidth = 30,
+            ellipsis_char = "...",
+            before = function(entry, vim_item)
+                return vim_item
+            end
+
         })
     },
     window = {
@@ -112,12 +104,12 @@ lsp.setup_nvim_cmp({
 
 lsp.set_preferences {
     sign_icons = {
-        error =" ",
+        error = " ",
         warn = " ",
         hint = " ",
-        info = " "    }
+        info = " "
+    }
 }
 
 lsp.setup()
 require "config.lsp-dap"
-
