@@ -42,7 +42,15 @@ cmp_mappings['<S-Tab>'] = nil
 local lspkind = require('lspkind')
 local ELLIPSIS_CHAR = "..."
 
-
+vim.diagnostic.config({
+    virtual_text = true,
+    severity_sort = true,
+    float = {
+        border = 'rounded',
+        source = 'always'
+        },
+    signs = true,
+})
 
 lsp.on_attach(function(client, bufnr)
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
@@ -71,14 +79,19 @@ lsp.on_attach(function(client, bufnr)
 end)
 
 
-local luasnip = require("luasnip")
+local luasnip = require("luasnip").setup()
 
 
 
 lsp.setup_nvim_cmp({
-
+    snippet = {
+            expand = function(args)
+                require('luasnip').lsp_expand(args.body)
+            end
+        },
     sources = {
         { name = 'path' },
+        {name = 'cmp_luasnip'},
         { name = 'nvim_lsp' },
         { name = 'buffer' },
         { name = 'luasnip' },
