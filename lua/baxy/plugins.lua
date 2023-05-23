@@ -43,9 +43,7 @@ lazy.setup({
     'theprimeagen/harpoon',
     'mbbill/undotree',
     'tpope/vim-fugitive',
-    {
-        'VonHeikemen/lsp-zero.nvim',
-        dependencies = { 
+    'BurntSushi/ripgrep',
             -- LSP Support
             'neovim/nvim-lspconfig',             -- Required
             'williamboman/mason.nvim',           -- Optional
@@ -53,7 +51,11 @@ lazy.setup({
 
             -- Autocompletion
             "onsails/lspkind.nvim",
-            'hrsh7th/nvim-cmp',         -- Required
+    {'hrsh7th/nvim-cmp',
+        event = "BufRead",
+        config = function()
+            require("config.lsp-dap")
+        end},
             'hrsh7th/cmp-nvim-lsp',     -- Required
             'hrsh7th/cmp-buffer',       -- Optional
             'hrsh7th/cmp-path',         -- Optional
@@ -65,13 +67,7 @@ lazy.setup({
             -- Snippets
             'L3MON4D3/LuaSnip',             -- Required
             'rafamadriz/friendly-snippets', -- Optional
-            "hrsh7th/cmp-nvim-lsp-signature-help"
-        },
-        event = "BufRead",
-        config = function()
-            require("config.lsp")
-        end
-    },
+            "hrsh7th/cmp-nvim-lsp-signature-help",
     "timonv/vim-cargo",
     {
         'rose-pine/neovim',
@@ -137,7 +133,6 @@ lazy.setup({
         end,
         lazy = false
     },
-    'navarasu/onedark.nvim',
     {
         'nvim-lualine/lualine.nvim',
         dependencies = { 'nvim-tree/nvim-web-devicons' },

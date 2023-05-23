@@ -32,6 +32,7 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
     ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
     ['<C-y>'] = cmp.mapping.confirm({ select = true }),
     ["<C-Space>"] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.abort(),
 })
 
 cmp_mappings['<Tab>'] = nil
@@ -90,11 +91,11 @@ lsp.setup_nvim_cmp({
             end
         },
     sources = {
-        { name = 'path' },
-        {name = 'cmp_luasnip'},
-        { name = 'nvim_lsp' },
-        { name = 'buffer' },
         { name = 'luasnip' },
+        { name = 'nvim_lsp' },
+        {name = 'cmp_luasnip'},
+        { name = 'path' },
+        { name = 'buffer' },
         { name = 'nvim_lsp_signature_help' },
     },
     mapping = cmp_mappings,

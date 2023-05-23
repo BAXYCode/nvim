@@ -1,6 +1,9 @@
 local M = {}
 
 function M.setup(servers, options)
+   local neodev =  require("neodev").setup({
+  -- add any options here, or leave empty to use the default settings
+})
     local lspconfig = require "lspconfig"
     local icons = require "config.icons"
     local util = require "lspconfig/util"
@@ -28,12 +31,11 @@ function M.setup(servers, options)
             local opts = vim.tbl_deep_extend("force", options, servers[server_name] or {})
             lspconfig[server_name].setup { opts }
         end,
-        ["jdtls"] = function()
-            -- print "jdtls is handled by nvim-jdtls"
-        end,
         ["lua_ls"] = function()
             local opts = vim.tbl_deep_extend("force", options, servers["lua_ls"] or {})
             lspconfig.lua_ls.setup(require("neodev").setup { opts })
+            
+            print("rust-analyzer is called")
         end,
         ["rust_analyzer"] = function()
             local opts = vim.tbl_deep_extend("force", options, servers["rust_analyzer"] or {})
@@ -43,6 +45,7 @@ function M.setup(servers, options)
             local codelldb_path = extension_path .. "adapter/codelldb"
             local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
             require("rust-tools").setup ({
+                single_file_support = false,
                 tools = {
                     root_dir = util.root_pattern("Cargo.toml"),
                     autoSetHints = false,
@@ -90,6 +93,8 @@ function M.setup(servers, options)
             }
         end,
     })
+
+
 end
 
 return M

@@ -1,4 +1,5 @@
 local M = {}
+local cmp =require('config.cmp')
 
 -- local util = require "lspconfig.util"
 local servers = {
@@ -51,7 +52,7 @@ local servers = {
                     maxPreload = 2000,
                     preloadFileSize = 50000,
                 },
-                completion = { callSnippet = "Both" },
+                completion = { callSnippet = "luasnip" },
                 telemetry = { enable = false },
             },
         },
@@ -76,6 +77,30 @@ local servers = {
 }
 
 function M.on_attach(client, bufnr)
+    require('config.cmp')
+        
+    local bufopt = { noremap = true, silent = true, buffer = bufnr }
+    local bind = vim.keymap.set
+
+    bind('n', 'gd', "<cmd>lua require'telescope.builtin'.lsp_definitions()<CR>", bufopt)
+
+    -- bind('n', 'K', vim.lsp.buf.hover, bufopt)
+    bind('n', 'K', '<cmd>Lspsaga hover_doc<cr>', bufopt)
+
+    bind('n', '<leader>ca', '<cmd>Lspsaga code_action<cr>', bufopt)
+    bind('n', '<leader>lf', function() vim.lsp.buf.format({ async = true }) end, bufopt)
+    bind('n', '<leader>dd', function() vim.lsp.buf.definition() end, bufopt)
+    bind("n", "<leader>vd", function() vim.diagnostic.open_float() end, bufopt)
+    bind("n", "<leader>vca", function() vim.lsp.buf.code_action() end, bufopt)
+    bind("n", "<leader>vrr", function() vim.lsp.buf.references() end, bufopt)
+    bind("n", "<leader>vrn", function() vim.lsp.buf.rename() end, bufopt)
+    bind("i", "<C-h>", function() vim.lsp.buf.signature_help() end, bufopt)
+    -- Lspsaga Diagnostic
+    bind('n', '<leader>dl', '<cmd>Lspsaga diagnostic_jump_next<cr>', bufopt)
+    bind('n', '<leader>dh', '<cmd>Lspsaga diagnostic_jump_prev<cr>', bufopt)
+
+
+    client.server_capabilities.semanticTokensProvider = nil
     -- Enable completion triggered by <C-X><C-O>
     -- See `:help omnifunc` and `:help ins-completion` for more information.
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
@@ -86,8 +111,6 @@ function M.on_attach(client, bufnr)
 
     -- Configure key mappings
     require("config.lsp-dap.keymaps").setup(client, bufnr)
-
-    print(require('cmp').visible())
 
 
     -- tagfunc
