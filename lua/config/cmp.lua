@@ -55,6 +55,18 @@ formatting = {
       { name = 'buffer' }
     }
   })
+ local sign = function(opts)
+  vim.fn.sign_define(opts.name, {
+    texthl = opts.name,
+    text = opts.text,
+    numhl = ''
+  })
+end
+
+sign({name = 'DiagnosticSignError', text = ' '})
+sign({name = 'DiagnosticSignWarn', text = ' '})
+sign({name = 'DiagnosticSignHint', text = ' '})
+sign({name = 'DiagnosticSignInfo', text = ' '})
 
   -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
  -- cmp.setup.cmdline(':', {
