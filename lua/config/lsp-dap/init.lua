@@ -18,17 +18,7 @@ local servers = {
         },
     },
     -- pylsp = {}, -- Integration with rope for refactoring - https://github.com/python-rope/pylsp-rope
-    rust_analyzer = {
-        settings = {
-            ["rust-analyzer"] = {
-                cargo = { allFeatures = true },
-                checkOnSave = {
-                    command = "clippy",
-                    extraArgs = { "--no-deps" },
-                },
-            },
-        },
-    },
+    rust_analyzer = {     },
     lua_ls = {
         settings = {
             Lua = {
