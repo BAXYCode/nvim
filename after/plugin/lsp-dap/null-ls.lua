@@ -11,7 +11,6 @@ local sources = {
     b.diagnostics.cppcheck,
     b.diagnostics.eslint_d,
     b.diagnostics.flake8,
-    b.diagnostics.ltrs,
     b.diagnostics.markdownlint,
     b.diagnostics.mypy,
     b.diagnostics.solhint,

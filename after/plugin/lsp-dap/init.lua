@@ -139,18 +139,18 @@ local opts = {
 }
 
 -- Setup LSP handlers
-require("after.plugin.lsp-dap.options").setup()
+require("lsp-dap.options").setup()
 
 function M.setup()
     -- null-ls
 
-    require("after.plugin.lsp-dap.null-ls").setup(opts)
+    require("lsp-dap.null-ls").setup(opts)
 
     -- Installer
-    require("after.plugin.lsp-dap.factory").setup(servers, opts)
+    require("lsp-dap.factory").setup(servers, opts)
     
     --keymaps
-    require("after.plugin.lsp-dap.keymaps").setup()
+    require("lsp-dap.keymaps").setup()
     -- Inlay hints
     -- require("config.lsp.inlay-hints").setup()
 end

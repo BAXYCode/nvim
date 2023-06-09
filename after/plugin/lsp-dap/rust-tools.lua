@@ -6,7 +6,6 @@
             local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
 
 local util = require "lspconfig/util"
-print('i am sourced')
 return
 
             require("rust-tools").setup({
