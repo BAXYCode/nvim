@@ -54,7 +54,7 @@ lazy.setup({
     {'hrsh7th/nvim-cmp',
         event = "BufRead",
         config = function()
-            require("config.lsp-dap")
+            require("config.cmp")
         end},
             'hrsh7th/cmp-nvim-lsp',     -- Required
             'hrsh7th/cmp-buffer',       -- Optional

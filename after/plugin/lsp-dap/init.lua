@@ -97,7 +97,7 @@ function M.on_attach(client, bufnr)
     vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr()")
 
     -- Configure key mappings
-    require("config.lsp-dap.keymaps").setup(client, bufnr)
+    --require("config.lsp-dap.keymaps").setup(client, bufnr)
 
 
     -- tagfunc
@@ -126,7 +126,7 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
         "additionalTextEdits",
     },
 }
-local inspect = require 'config.lsp-dap.inspect'
+--local inspect = require 'config.lsp-dap.inspect'
 M.capabilities = capabilities
 --local inspect = require 'inspect'
 --print(inspect(M.capabilities))
@@ -139,16 +139,18 @@ local opts = {
 }
 
 -- Setup LSP handlers
-require("config.lsp-dap.options").setup()
+require("after.plugin.lsp-dap.options").setup()
 
 function M.setup()
     -- null-ls
 
-    require("config.lsp-dap.null-ls").setup(opts)
+    require("after.plugin.lsp-dap.null-ls").setup(opts)
 
     -- Installer
-    require("config.lsp-dap.factory").setup(servers, opts)
-
+    require("after.plugin.lsp-dap.factory").setup(servers, opts)
+    
+    --keymaps
+    require("after.plugin.lsp-dap.keymaps").setup()
     -- Inlay hints
     -- require("config.lsp.inlay-hints").setup()
 end

@@ -53,7 +53,6 @@ end
 function M.setup()
   configure() -- Configuration
   configure_exts() -- Extensions
-  require("config.lsp-dap.keymaps").setup() -- Keymaps
 end
 
 

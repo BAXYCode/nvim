@@ -8,7 +8,7 @@ function M.setup(servers, options)
     local icons = require "config.icons"
     local util = require "lspconfig/util"
 
--- following code is to fix neovim never closing when exiting. 
+-- following code is to fix neovim never closing when exiting.
 --local ok, wf = pcall(require, "vim.lsp._watchfiles")
  -- if ok then
   --   -- disable lsp watcher. Too slow on linux
@@ -47,7 +47,7 @@ function M.setup(servers, options)
         end,
         ["rust_analyzer"] = function()
             local opts = vim.tbl_deep_extend("force", options, servers["rust_analyzer"] or {})
-            require('config.lsp-dap.rust-tools')
+            require('lsp-dap.rust-tools')
             -- DAP settings - https://github.com/simrat39/rust-tools.nvim#a-better-debugging-experience
            -- local extension_path = install_root_dir .. "/packages/codelldb/extension/"
             --local codelldb_path = extension_path .. "adapter/codelldb"
