@@ -1,3 +1,4 @@
+---@diagnostic disable-next-line: unused-local
  local M = {}
 local cmp = require('cmp')
 local lspkind = require('lspkind')
@@ -20,11 +21,12 @@ vim.diagnostic.config({
         source = true
         },
     signs = true,
-}) 
+})
 cmp.setup({
 formatting = {
     format = lspkind.cmp_format({
       mode = 'symbol', -- show only symbol annotations
+---@diagnostic disable-next-line: 631
       maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
       ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
     })
@@ -55,18 +57,6 @@ formatting = {
       { name = 'buffer' }
     }
   })
- local sign = function(opts)
-  vim.fn.sign_define(opts.name, {
-    texthl = opts.name,
-    text = opts.text,
-    numhl = ''
-  })
-end
-
-sign({name = 'DiagnosticSignError', text = ' '})
-sign({name = 'DiagnosticSignWarn', text = ' '})
-sign({name = 'DiagnosticSignHint', text = ' '})
-sign({name = 'DiagnosticSignInfo', text = ' '})
 
   -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
  -- cmp.setup.cmdline(':', {

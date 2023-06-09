@@ -25,7 +25,7 @@ local sources = {
     b.formatting.goimports,
     b.formatting.lua_format,
     b.formatting.prettierd,
---    b.formatting.ruff,
+    b.formatting.ruff,
     b.formatting.rustywind,
     b.formatting.stylua,
     b.formatting.tidy,

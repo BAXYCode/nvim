@@ -18,7 +18,7 @@ local ok, lazy = pcall(require, "lazy")
 if not ok then return end
 local opts = {}
 lazy.setup({
-
+    'BurntSushi/ripgrep',
     {
         "folke/which-key.nvim",
         config = function()

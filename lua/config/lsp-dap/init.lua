@@ -18,7 +18,6 @@ local servers = {
         },
     },
     -- pylsp = {}, -- Integration with rope for refactoring - https://github.com/python-rope/pylsp-rope
-    rust_analyzer = {     },
     lua_ls = {
         settings = {
             Lua = {
@@ -39,9 +38,6 @@ local servers = {
                         [vim.fn.expand "$VIMRUNTIME/lua"] = true,
                         [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
                     },
-                    -- library = vim.api.nvim_get_runtime_file("", true),
-                    maxPreload = 2000,
-                    preloadFileSize = 50000,
                 },
                 completion = { callSnippet = "luasnip" },
                 telemetry = { enable = false },
